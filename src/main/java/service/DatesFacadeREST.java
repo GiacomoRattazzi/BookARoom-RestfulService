@@ -36,6 +36,7 @@ public class DatesFacadeREST extends AbstractFacade<Dates> {
     }
 
     @POST
+    @Path("/create")
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Dates entity) {
@@ -90,6 +91,17 @@ public class DatesFacadeREST extends AbstractFacade<Dates> {
     public List<Dates> findDatesByRoomName(@PathParam("roomName") String roomName) {
         return super.findDatesByRoomName("Dates.findByRoomName", "roomName", roomName);
     }
+   
+    
+    @GET
+    @Path("/removeFromDates/{dId}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void removeFromDates(@PathParam("dId") Integer dId) {
+        Dates d = find(dId);
+        getEntityManager().remove(d);
+    }
+    
+    
 
     @Override
     protected EntityManager getEntityManager() {

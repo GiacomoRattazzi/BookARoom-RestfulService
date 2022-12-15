@@ -106,7 +106,16 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     public List<Reservations> getReservations(@PathParam("id") Integer id) {
         return find(id).getReservationsList();
     }
-
+   
+    @GET
+    @Path("/removeFromReservations/{uId}/{rId}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void removeFromReservations(@PathParam("uId") Integer uId, @PathParam("rId") Integer rId) {
+        Reservations r = getEntityManager().find(Reservations.class, rId);
+        Users u = find(uId);
+        u.getReservationsList().remove(r);
+        getEntityManager().merge(u);
+    }
  
     
     
