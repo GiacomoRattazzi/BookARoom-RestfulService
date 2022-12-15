@@ -36,6 +36,7 @@ public class ReservationsFacadeREST extends AbstractFacade<Reservations> {
     }
 
     @POST
+    @Path("/create")
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Reservations entity) {
@@ -81,6 +82,13 @@ public class ReservationsFacadeREST extends AbstractFacade<Reservations> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
+    }
+    
+    
+    @GET
+    @Path("/findByReservationNumber/{number}")
+    public Reservations findByReservationNumber(@PathParam("number") Integer number) {
+        return super.findByReservationNumber("Reservations.findByReservationNumber", "reservationNumber", number);
     }
 
     @Override

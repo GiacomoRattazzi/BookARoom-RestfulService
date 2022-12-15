@@ -5,7 +5,9 @@
  */
 package service;
 
+import bookaroomrestfulservice.models.Dates;
 import bookaroomrestfulservice.models.Rooms;
+import bookaroomrestfulservice.models.Users;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -82,6 +84,14 @@ public class RoomsFacadeREST extends AbstractFacade<Rooms> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    //get current room
+    @GET
+    @Path("/findByRoomName/{roomName}")
+    public List<Rooms> findDatesByRoomName(@PathParam("roomName") String roomName) {
+        return super.findByRoomName("Rooms.findByRoomName", "roomName", roomName);
+    }
+    
 
     @Override
     protected EntityManager getEntityManager() {

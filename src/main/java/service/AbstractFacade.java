@@ -5,6 +5,7 @@
  */
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -16,6 +17,8 @@ import javax.persistence.Query;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
+    private ArrayList<String> nullFixer =new ArrayList<String>();
+    
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -42,6 +45,38 @@ public abstract class AbstractFacade<T> {
     public T findByName(Object namedQuery, Object parameterName, Object name) {
         Query query = getEntityManager().createNamedQuery((String) namedQuery);
         List<T> results = query.setParameter((String) parameterName, (String) name).getResultList();
+        if(results.size() > 0) {
+            return results.get(0);
+        }
+        return null;
+    }
+    
+    
+    //get booked dates from specific room:
+        
+    public List<T> findDatesByRoomName(Object namedQuery, Object parameterName, Object name) {
+        Query query = getEntityManager().createNamedQuery((String) namedQuery);
+        List<T> results = query.setParameter((String) parameterName, (String) name).getResultList();
+        if(results.size() > 0) {
+            return results;
+        }
+        return null;
+    }
+    
+    //get current room
+    public List<T> findByRoomName(Object namedQuery, Object parameterName, Object name) {
+        Query query = getEntityManager().createNamedQuery((String) namedQuery);
+        List<T> results = query.setParameter((String) parameterName, (String) name).getResultList();
+        if(results.size() > 0) {
+            return results;
+        }
+        return null;
+    }
+    
+    //get current reservation
+    public T findByReservationNumber(Object namedQuery, Object parameterName, Object name) {
+        Query query = getEntityManager().createNamedQuery((String) namedQuery);
+        List<T> results = query.setParameter((String) parameterName, (int) name).getResultList();
         if(results.size() > 0) {
             return results.get(0);
         }

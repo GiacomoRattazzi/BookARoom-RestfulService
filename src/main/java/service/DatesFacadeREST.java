@@ -82,6 +82,14 @@ public class DatesFacadeREST extends AbstractFacade<Dates> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    
+    //get booked dates from specific room.
+    @GET
+    @Path("/findByRoomName/{roomName}")
+    public List<Dates> findDatesByRoomName(@PathParam("roomName") String roomName) {
+        return super.findDatesByRoomName("Dates.findByRoomName", "roomName", roomName);
+    }
 
     @Override
     protected EntityManager getEntityManager() {

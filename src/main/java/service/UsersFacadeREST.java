@@ -5,6 +5,7 @@
  */
 package service;
 
+import bookaroomrestfulservice.models.Reservations;
 import bookaroomrestfulservice.models.Users;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -87,10 +88,26 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
         return results.size() == 1;
     }
     
-
-
+    @GET
+    @Path( "/addToReservationUser/{uId}/{rId}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void addToReservationUser(@PathParam("uId") Integer uId, @PathParam("rId") Integer rId) {
+        Reservations r = getEntityManager().find(Reservations.class, rId);
+        Users u = find(uId);
+        u.getReservationsList().add(r);
+        getEntityManager().merge(u);
+    }
     
     
+    
+    @GET
+    @Path("/getReservations/{id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Reservations> getReservations(@PathParam("id") Integer id) {
+        return find(id).getReservationsList();
+    }
+
+ 
     
     
     @GET
