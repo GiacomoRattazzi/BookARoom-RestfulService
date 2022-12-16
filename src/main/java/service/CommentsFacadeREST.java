@@ -6,6 +6,7 @@
 package service;
 
 import bookaroomrestfulservice.models.Comments;
+import bookaroomrestfulservice.models.Users;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,12 +37,14 @@ public class CommentsFacadeREST extends AbstractFacade<Comments> {
     }
 
     @POST
+    @Path("/create")
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Comments entity) {
         super.create(entity);
     }
 
+    
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
