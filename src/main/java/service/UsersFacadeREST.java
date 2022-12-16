@@ -46,7 +46,7 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("/edit/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Users entity) {
         super.edit(entity);
