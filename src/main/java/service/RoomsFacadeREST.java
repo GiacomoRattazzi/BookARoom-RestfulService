@@ -24,7 +24,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Giac
+ * @author Team BookARoom
  */
 @Stateless
 @Path("bookaroomrestfulservice.models.rooms")

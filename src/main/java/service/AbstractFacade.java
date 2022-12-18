@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Giac
+ * @author Team BookARoom
  */
 public abstract class AbstractFacade<T> {
 
